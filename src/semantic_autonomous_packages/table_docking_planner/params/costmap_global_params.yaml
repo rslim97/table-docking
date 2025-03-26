@@ -1,0 +1,23 @@
+global_frame: map
+rolling_window: true
+update_frequency: 5.0
+resolution: 0.1
+width: 20
+height: 20
+track_unknown_space: true
+always_send_full_costmap: true
+
+plugins:
+  - {name: static,                    type: "costmap_2d::StaticLayer"}
+  # - {name: under_table_layer,         type: "costmap_2d::ObstacleLayer"}
+  - {name: laser_obstacle_layer,           type: "costmap_2d::ObstacleLayer"}
+  - {name: camera_obstacle_layer,          type: "costmap_2d::ObstacleLayer"}
+  - {name: voxel_obstacle_layer,       type: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"}
+  # - {name: table_superpixel_layer,    type: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"}
+  - {name: inflation,                 type: "costmap_2d::InflationLayer"}
+
+inflation:
+  enabled: true
+
+static:
+  enabled: false

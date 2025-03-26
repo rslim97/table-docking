@@ -1,0 +1,18 @@
+<launch>
+   <param name="/use_sim_time" value="true"/>
+
+    <include file="$(find depthimage_to_pointcloud2)/launch/multi_depthimage_to_pointcloud2.launch"/>
+
+    <include file="$(find table_docking_planner)/launch/planner.launch"/>
+
+    <rosparam file="$(find autonomous_launch)/params/footprint.yaml" command="load"/>
+
+
+    <!--uncomment for testing purpose only without robot base-->
+    <!--run dummy map-->
+    <!-- <arg name="map" default="$(find autonomous_launch)/maps/map_csb_2.yaml"/>
+    <node name="map_server" pkg="map_server" type="map_server" args="$(arg map)"/> -->
+    <!--run dummy tf-->
+    <!-- <include file="$(find dynamic_tf_publisher)/launch/multi_dynamic_tf_publisher.launch"/> -->
+
+</launch>

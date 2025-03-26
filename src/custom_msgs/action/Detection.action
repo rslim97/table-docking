@@ -1,0 +1,18 @@
+# goal definition
+string detection_request
+uint16 point_x
+uint16 point_y
+---
+# result definition
+bool succeeded
+float32 point_x
+float32 point_y
+float32 point_z
+float32 quat_x
+float32 quat_y
+float32 quat_z
+float32 quat_w
+string information
+---
+# feedback
+string status

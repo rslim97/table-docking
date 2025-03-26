@@ -1,0 +1,5 @@
+# pi: 3.14159
+# camera_right_link->camera_right_rgb_frame
+frame:
+ trans: [0.0,0.0,-0.045]
+ rot: [0.0,0.0,0.0] # yaw, pitch, roll

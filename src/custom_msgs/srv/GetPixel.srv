@@ -1,0 +1,4 @@
+geometry_msgs/PointStamped input_point
+---
+float32 pixel_x
+float32 pixel_y

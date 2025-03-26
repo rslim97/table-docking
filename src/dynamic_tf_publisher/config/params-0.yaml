@@ -1,0 +1,5 @@
+# pi: 3.14159
+# world->map->odom->base_footprint
+frame:
+ trans: [0.0,0.0,0.0]
+ rot: [0.0,0.0,0.0] # yaw, pitch, roll

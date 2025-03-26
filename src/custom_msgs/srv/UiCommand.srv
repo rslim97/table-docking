@@ -1,0 +1,25 @@
+geometry_msgs/PointStamped input_point
+geometry_msgs/PointStamped input_point2
+geometry_msgs/Quaternion input_orientation
+geometry_msgs/Quaternion input_orientation2
+custom_msgs/Drag drag_input
+custom_msgs/Click click_input
+string command_string
+uint8 command
+
+# Possible command values
+uint8 CANCEL                    = 0
+uint8 NEXT_STEP                 = 1
+uint8 ENTER_DOOR                = 2
+uint8 ENTER_DOOR_DRAG           = 3
+uint8 EXIT_DOOR                 = 4
+uint8 DOCK_TABLE_KNOWN_CLICK    = 5
+uint8 GO_ROOM                   = 6
+uint8 TRAVERSE_RAMP             = 7
+uint8 DOCK_TABLE_KNOWN_POSE     = 8
+uint8 DOCK_TABLE_UNKNOWN_POSE   = 9
+uint8 DOCK_TABLE_IMAGE_ONE      = 10
+uint8 DOCK_TABLE_IMAGE_TWO      = 11
+---
+
+bool received

@@ -1,0 +1,4 @@
+<launch>
+    <arg name="camera_name" default="your_camera_name" />
+    <node name="$(arg camera_name)_depthimage_to_pointcloud2" pkg="depthimage_to_pointcloud2" type="depthimage_to_pointcloud2_node" args="$(arg camera_name)" output="screen"/>
+</launch>

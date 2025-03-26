@@ -1,0 +1,11 @@
+<launch>
+    <node name="faster_rcnn" pkg="perception" type="ros_demo.py" 
+        args="--net res101 --dataset vg --load_dir FasterRCNN/models --cfg FasterRCNN/cfgs/res101.yml --classes_dir FasterRCNN/data/genome/1600-400-20" 
+    output="screen"/>
+
+    <rosparam command="load" file="$(find perception)/config/perception_params.yaml" />
+    <node name="perception_node" pkg="perception" type="perception_node" output="screen"/>
+    <node name="visualizer_node" pkg="perception" type="visualizer_node" output="screen"/>
+</launch>
+
+

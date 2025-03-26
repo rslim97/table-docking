@@ -1,0 +1,3 @@
+geometry_msgs/Point pt1
+geometry_msgs/Point pt2
+geometry_msgs/Pose center

@@ -1,0 +1,23 @@
+<launch>
+    <!-- <arg name="rgb_camera"              default="/camera_right"/> -->
+    <!-- <arg name="map_flag"                default="false"/> -->
+    
+    <!-- <arg name="sim_flag"                default="false"/> -->
+    <!-- <arg name="lidar_flag"              default="false"/> -->
+    <!-- <arg name="camera_height"           default="1.5"/> -->
+    <!-- <arg name="segmentation_flag"       default="false"/> -->
+
+    <!-- <arg name="gpu_flag"                default="false"/>
+    <arg name="VG_dataset"              default="false"/> -->
+
+    <!-- <param name="rgb_camera"            value="$(arg rgb_camera)"/> -->
+    <!-- <param name="map_flag"                value="$(arg map_flag)"/> -->
+    <!-- <param name="sim_flag"              value="$(arg sim_flag)"/> -->
+    <!-- <param name="lidar_flag"            value="$(arg lidar_flag)"/> -->
+    <!-- <param name="camera_height"         value="$(arg camera_height)"/> -->
+    <!-- <param name="segmentation_flag"         value="$(arg segmentation_flag)"/> -->
+    
+    <rosparam command="load" file="$(find perception)/config/perception_params.yaml" />
+    <node name="perception_node" pkg="perception" type="perception_node" output="screen">
+    </node>
+</launch>

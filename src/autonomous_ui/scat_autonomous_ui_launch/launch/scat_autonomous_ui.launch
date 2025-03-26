@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- <node name="ui_image_drag_interface" pkg="web_ui" type="ui_image_drag_interface_node"/> -->
+    <!-- <node name="ui_image_drag_interface" pkg="web_ui" type="ui_image_interface_node"/> -->
+    <!-- <node pkg="qt_ui" type="table_qt_ui_drag.py" name="qt_ui_drag" /> -->
+    <!-- <node pkg="qt_ui" type="table_qt_ui_new.py" name="qt_ui"  output="screen" launch-prefix="xterm -hold -e python3 -m pdb"/> -->
+    <node pkg="qt_ui" type="table_qt_ui_new.py" name="qt_ui"  output="screen"/>
+
+</launch>

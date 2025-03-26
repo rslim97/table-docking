@@ -1,0 +1,2 @@
+#!/bin/bash
+rosbag record -o "$1" /amcl_pose /cmd_vel /joy_vel /docking_vel /e_stop /map /docking_planner/DockingGlobalPlannerROS/plan /docking_as/cancel /odometry/filtered /tf /tf_static /clicked_point /docking_goal_pose /table_surrounding_poses /docking_vel /docking_status /argal_dock_poses /table_grid_map /move_group/display_planned_path /docking_planner/table_costmap/rgbd_obstacle_layer/voxel_grid /faster_rcnn_output /camera_right/color/rotated /camera_left/color/rotated

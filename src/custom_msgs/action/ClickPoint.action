@@ -1,0 +1,22 @@
+std_msgs/Header header
+geometry_msgs/Point point1
+geometry_msgs/Point point2
+geometry_msgs/Point point3
+geometry_msgs/Point point4
+bool two_points
+
+custom_msgs/Click click_input
+custom_msgs/Drag drag_input
+uint8 command
+
+# Possible command
+uint8 OFF = 0
+uint8 CLICK = 1
+uint8 DRAG = 2
+uint8 CLICK_DOOR = 3
+uint8 DRAG_DOOR = 4
+---
+bool reach
+---
+time time_stamp
+float32 percentage

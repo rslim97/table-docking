@@ -1,0 +1,29 @@
+#goal definition
+geometry_msgs/PointStamped input_point
+geometry_msgs/PointStamped input_point2
+geometry_msgs/Quaternion input_orientation
+geometry_msgs/Quaternion input_orientation2
+std_msgs/ColorRGBA click_rgb
+string command_string
+uint8 command 
+#0-cancel, 1-doorway traversal, 2-confirm/next step, 3- exit door/elevator, 
+#4-dock to table(click point, detection), 5 - go to room(name/point), 
+#7-table docking(pose, detection), 8-table docking(pose, !detection), 
+#9- table docking(image based) #10- table docking(image based, two points, !detection)
+# Possible command values
+uint8 CANCEL                    = 0
+uint8 NEXT_STEP                 = 1
+uint8 DOOR_TRAVERSAL            = 2
+uint8 LIFT_TRAVERSAL            = 3
+uint8 TABLE_DOCKING             = 4
+uint8 ROOM_TRAVERSAL            = 5
+uint8 RAMP_TRAVERSAL            = 6
+---
+#result definition
+bool reach_door
+uint8 previous_command
+uint8 current_state
+---
+#feedback
+time time_stamp
+float32 percentage

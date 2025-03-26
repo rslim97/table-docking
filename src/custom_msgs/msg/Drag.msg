@@ -1,0 +1,4 @@
+geometry_msgs/PointStamped camera_point
+geometry_msgs/PointStamped drag_start_estimated
+geometry_msgs/PointStamped drag_end_estimated
+std_msgs/ColorRGBA click_rgb

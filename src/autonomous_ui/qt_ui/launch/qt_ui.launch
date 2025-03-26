@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- <node name="ui_click_interface_node" pkg="web_ui" type="ui_click_interface_node"/> -->
+    <node pkg="qt_ui" type="table_qt_ui_new.py" name="qt_ui" />
+
+</launch>

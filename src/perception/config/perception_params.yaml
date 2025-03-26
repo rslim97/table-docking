@@ -1,0 +1,4 @@
+perception:
+  map_flag: true
+  lidar_flag: false
+  segmentation_flag: false

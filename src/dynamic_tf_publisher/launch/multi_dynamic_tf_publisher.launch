@@ -1,0 +1,57 @@
+<launch>
+  <include
+	   file="$(find dynamic_tf_publisher)/launch/dynamic_tf_publisher.launch">
+    <arg name="reference_frame" value="map" />
+    <arg name="frame" value="odom" />
+    <arg name="param_file" value="params-0.yaml" />
+  </include>
+
+  <include
+	   file="$(find dynamic_tf_publisher)/launch/dynamic_tf_publisher.launch">
+    <arg name="reference_frame" value="odom" />
+    <arg name="frame" value="base_footprint" />
+    <arg name="param_file" value="params-0.yaml" />
+  </include>
+
+  <include
+	   file="$(find dynamic_tf_publisher)/launch/dynamic_tf_publisher.launch">
+    <arg name="reference_frame" value="base_footprint" />
+    <arg name="frame" value="camera_left_link" />
+    <arg name="param_file" value="params-1.yaml" />
+  </include>
+
+  <include
+	   file="$(find dynamic_tf_publisher)/launch/dynamic_tf_publisher.launch">
+    <arg name="reference_frame" value="base_footprint" />
+    <arg name="frame" value="camera_right_link" />
+    <arg name="param_file" value="params-2.yaml" />
+  </include>
+
+  <include
+	   file="$(find dynamic_tf_publisher)/launch/dynamic_tf_publisher.launch">
+    <arg name="reference_frame" value="camera_left_link" />
+    <arg name="frame" value="camera_left_rgb_frame" />
+    <arg name="param_file" value="params-3.yaml" />
+  </include>
+
+    <include
+	   file="$(find dynamic_tf_publisher)/launch/dynamic_tf_publisher.launch">
+    <arg name="reference_frame" value="camera_right_link" />
+    <arg name="frame" value="camera_right_rgb_frame" />
+    <arg name="param_file" value="params-4.yaml" />
+  </include>
+
+  <include
+	   file="$(find dynamic_tf_publisher)/launch/dynamic_tf_publisher.launch">
+    <arg name="reference_frame" value="camera_left_rgb_frame" />
+    <arg name="frame" value="camera_left_rgb_optical_frame" />
+    <arg name="param_file" value="params-5.yaml" />
+  </include>
+
+  <include
+	   file="$(find dynamic_tf_publisher)/launch/dynamic_tf_publisher.launch">
+    <arg name="reference_frame" value="camera_right_rgb_frame" />
+    <arg name="frame" value="camera_right_rgb_optical_frame" />
+    <arg name="param_file" value="params-6.yaml" />
+  </include>
+</launch>

@@ -1,0 +1,26 @@
+<launch>
+
+   <arg name="footprint"            default="[[-0.6, -0.33], [-0.6, 0.33], [0.3, 0.33], [0.3, -0.33]]"/>
+   <arg name="map_flag"             default="true"/>
+   <arg name="simulation_flag"      default="false"/>
+   <arg name="moveit_flag"          default="true"/>
+   <arg name="update_goal_flag"     default="true"/>
+
+   <param name="moveit_flag"        value="$(arg moveit_flag)"/>
+   <param name="update_goal_flag"   value="$(arg update_goal_flag)"/>
+   <!-- <param name="/use_sim_time" value="true"/> -->
+
+    <node pkg="table_docking_planner" type="planner_node" respawn="false" name="planner" output="screen">
+        <rosparam file="$(find table_docking_planner)/params/costmap_common_params.yaml" command="load" ns="global_costmap" unless="$(arg simulation_flag)"/>
+        <rosparam file="$(find table_docking_planner)/params/costmap_common_params.yaml" command="load" ns="local_costmap"/>
+
+        <rosparam file="$(find table_docking_planner)/params/costmap_global_params.yaml" command="load" ns="global_costmap"/> 
+        <rosparam file="$(find table_docking_planner)/params/costmap_local_params.yaml" command="load" ns="local_costmap"/> 
+
+        <param name="global_costmap/global_frame" value="odom" unless="$(arg map_flag)"/>
+        <param name="global_costmap/global_frame" value="map" if="$(arg map_flag)"/>
+    </node>
+
+    <!-- <node type="rviz" name="rviz" pkg="rviz" args="-d $(find table_docking_planner)/rviz/config_file.rviz"/> -->
+
+</launch>

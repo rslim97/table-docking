@@ -1,0 +1,23 @@
+# Repo-specific gitignore
+./vscode
+./catkin_tools
+
+# User-specific stuff:
+.idea/*
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/dictionaries
+.mp4 # videos
+
+# Jupyter Notebook
+.ipynb_checkpoints
+.virtual_documents
+
+# virtualenv
+.venv*
+venv*/
+ENV*/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]

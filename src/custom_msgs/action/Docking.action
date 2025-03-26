@@ -1,0 +1,37 @@
+geometry_msgs/PoseStamped target_pose
+geometry_msgs/PoseStamped target_pose2
+uint8 current_state
+uint8 SEARCH_PATH = 1
+uint8 STRAIGHT_LINE = 2
+# 1 - undocking, 2 - docking argal/scat with click point/pose, 
+#3 - docking with method with image ui, 4-docking with no detection and image ui, 
+#5 - docking with argal method and image ui, 6-docking with no detection, image ui and 2points
+float32 table_height
+float32 table_height_sd
+geometry_msgs/Point[] table_points #points represents table top points when current_state = 2
+geometry_msgs/PoseArray argal_docking_poses #only used when current_state = 5
+sensor_msgs/PointCloud2 table_point_cloud
+
+float32 distanceToGoal
+uint8 distanceType
+uint8 EUCLIDEAN = 0
+uint8 PROJECTED = 1
+
+uint8 localPlannerType
+# Possible local planners
+uint8 TEB = 0
+uint8 DWA = 1
+
+uint8 globalPlannerType
+# Possible global planners
+uint8 NAVFN = 0
+uint8 CARROT = 1
+
+bool updatingGoal
+#same command as UiCommand
+---
+bool reach
+geometry_msgs/PoseStamped currentGoal
+---
+time time_stamp
+float32 percentage

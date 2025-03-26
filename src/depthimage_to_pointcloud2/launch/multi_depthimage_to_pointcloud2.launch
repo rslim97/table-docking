@@ -1,0 +1,10 @@
+<launch>
+  <include
+	   file="$(find depthimage_to_pointcloud2)/launch/depthimage_to_pointcloud2.launch">
+    <arg name="camera_name" value="camera_left" />
+  </include>
+  <include
+	   file="$(find depthimage_to_pointcloud2)/launch/depthimage_to_pointcloud2.launch">
+    <arg name="camera_name" value="camera_right" />
+  </include>
+</launch>

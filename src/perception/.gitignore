@@ -1,0 +1,11 @@
+scripts/*
+segmentation_scripts/*
+
+!scripts/ros_demo.py
+!scripts/ros_demo_all_class.py
+!scripts/ros_tensorflow.py
+!segmentation_scripts/ros_demo_segmentation.py
+!segmentation_scripts/ros_vit_segmentation.py
+
+.vscode/
+README__.md

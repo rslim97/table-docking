@@ -1,0 +1,4 @@
+tableFileName: $(find object_handler)/semantic_data/csb_table.xml
+roomFileName: $(find object_handler)/semantic_data/csb_room.xml
+doorFileName: $(find object_handler)/semantic_data/csb_door.xml
+rampFileName: $(find object_handler)/semantic_data/hopsital_ramp.xml

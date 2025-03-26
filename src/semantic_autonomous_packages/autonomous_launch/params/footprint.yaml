@@ -1,0 +1,20 @@
+footprint: [[-0.6, -0.33], [-0.6, 0.33], [0.3, 0.33], [0.3, -0.33]]
+# footprint: [[0.1, 0.0], [0.1, 0.0], [-0.1, 0.0], [-0.1, 0.0]]
+
+planner: 
+  # Used in TEB local planner
+  localTebPlanner:
+    footprint_model:
+      vertices: [[-0.6, -0.33], [-0.6, 0.33], [0.3, 0.33], [0.3, -0.33]]
+
+  # Used in different costmap
+  global_costmap:
+    footprint: [[-0.6, -0.33], [-0.6, 0.33], [0.3, 0.33], [0.3, -0.33]]
+
+  under_table_costmap:
+    footprint: [[-0.6, -0.33], [-0.6, 0.33], [0.3, 0.33], [0.3, -0.33]]
+
+  local_costmap:
+    footprint: [[-0.6, -0.33], [-0.6, 0.33], [0.3, 0.33], [0.3, -0.33]]
+
+minDistanceFromTable: 0.2

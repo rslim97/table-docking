@@ -1,0 +1,3 @@
+geometry_msgs/PointStamped camera_point
+geometry_msgs/PointStamped click_point_estimated
+std_msgs/ColorRGBA click_rgb

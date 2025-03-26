@@ -1,0 +1,4 @@
+sensor_msgs/Image im_req
+---
+custom_msgs/Bboxes bboxes
+sensor_msgs/Image mask

@@ -1,0 +1,7 @@
+geometry_msgs/PointStamped input_point1
+# Currently input_point2 is not in use
+geometry_msgs/PointStamped input_point2 
+std_msgs/ColorRGBA click_rgb
+bool start
+---
+bool received

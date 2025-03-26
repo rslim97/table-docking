@@ -1,0 +1,19 @@
+#goal definition
+custom_msgs/Click click_input
+custom_msgs/Drag drag_input
+
+uint8 command
+# Possible command values
+uint8 OFF = 0
+uint8 CLICK = 1
+uint8 DRAG = 2
+---
+#result definition
+bool done
+---
+#feedback
+time receive_time
+uint16 pre_dock_pose_update_count
+uint16 dock_pose_update_count
+geometry_msgs/PoseStamped current_detected_goal
+float32 table_height

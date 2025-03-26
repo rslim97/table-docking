@@ -1,0 +1,5 @@
+# pi: 3.14159
+# base_footprint->camera_right_link
+frame:
+ trans: [0.04,0.0,1.415]
+ rot: [0.0,0.0,-0.5236] # yaw, pitch, roll

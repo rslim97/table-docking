@@ -1,0 +1,7 @@
+<library path="lib/libPerceptionNodelet">
+  <class name="perception/PerceptionNodelet" type="perception::PerceptionNodelet" base_class_type="nodelet::Nodelet">
+    <description>
+      This is the nodelet for the perception module.
+    </description>
+  </class>
+</library>

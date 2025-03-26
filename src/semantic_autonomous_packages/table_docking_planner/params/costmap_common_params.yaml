@@ -1,0 +1,454 @@
+footprint: [[-0.55, -0.28], [-0.55, 0.28], [0.25, 0.28], [0.25, -0.28]]
+footprint_padding: 0.01
+
+robot_base_frame: base_footprint
+update_frequency: 3.0
+publish_frequency: 3.0
+transform_tolerance: 0.7
+
+resolution: 0.02
+
+obstacle_range: 5.5
+raytrace_range: 6.0
+
+# #layer definitions
+static:
+    map_topic: /map
+    subscribe_to_updates: true
+    track_unknown_space: true
+    unknown_cost_value: -1
+
+
+inflation:
+    cost_scaling_factor: 10.0
+    inflation_radius: 0.8
+
+# # obstacles_laser:
+# #     observation_sources: laser
+# #     combination_method: 1 
+# #     footprint_clearing_enabled: false
+
+# #     laser: {data_type: LaserScan, clearing: true, marking: true, topic: /scan, inf_is_valid: true, obstacle_range: 5.0, raytrace_range: 4.5}
+# #     track_unknown_space: true
+
+laser_obstacle_layer:
+  enabled:              true
+  track_unknown_space:  false    #true needed for disabling global path planning through unknown space
+  combination_method: 1
+  observation_sources: laser_scan_sensor 
+  laser_scan_sensor: {data_type: LaserScan, topic: /scan, marking: true, clearing: true, inf_is_valid: true, obstacle_range: 5.0, raytrace_range: 4.5}
+
+
+camera_obstacle_layer:
+    # observation_sources: rgbd_camera_left rgbd_camera_right rgbd_camera_top
+    observation_sources: rgbd_camera_left rgbd_camera_right
+    combination_method: 1
+    footprint_clearing_method: false
+
+    rgbd_camera_left:
+        data_type          : PointCloud2
+        clearing           : true
+        marking            : true
+        topic              : /camera_left/pointcloud2
+        track_unknown_space: true
+        min_obstacle_height: 0.1
+        max_obstacle_height: 1.5
+        obstacle_range: 3.1
+        raytrace_range: 3.0
+
+    rgbd_camera_right:
+        data_type          : PointCloud2
+        clearing           : true
+        marking            : true
+        topic              : /camera_right/pointcloud2
+        track_unknown_space: true
+        min_obstacle_height: 0.1
+        max_obstacle_height: 1.5
+        obstacle_range: 3.1
+        raytrace_range: 3.0
+
+
+inflation_local:
+    inflation_radius: 0.05
+    cost_scaling_factor: 10
+
+# # under_table_layer:
+# #     # observation_sources: rgbd_camera_left rgbd_camera_right rgbd_camera_top
+# #     # observation_sources: rgbd_camera_left rgbd_camera_top
+# #     observation_sources: rgbd_camera_left
+# #     combination_method: 1
+# #     footprint_clearing_enabled: false
+# #     track_unknown_space: true
+
+# #     rgbd_camera_left:
+# #         data_type          : PointCloud2
+# #         clearing           : true
+# #         marking            : true
+# #         topic              : /camera/depth/image_rect_raw
+# #         track_unknown_space: true
+# #         min_obstacle_height: 0.1
+# #         max_obstacle_height: 0.5
+# #         obstacle_range: 1.0
+# #         raytrace_range: 1.1
+
+#     # rgbd_camera_right:
+#     #     data_type          : PointCloud2
+#     #     clearing           : true
+#     #     marking            : true
+#     #     topic              : /camera_right/depth/color/points
+#     #     track_unknown_space: true
+#     #     min_obstacle_height: 0.1
+#     #     max_obstacle_height: 0.5
+#     #     obstacle_range: 3.0
+#     #     raytrace_range: 3.1
+
+    
+#     # rgbd_camera_top:
+#     #     data_type          : PointCloud2
+#     #     clearing           : true
+#     #     marking            : true
+#     #     topic              : /camera_top/depth/color/points
+#     #     track_unknown_space: true
+#     #     min_obstacle_height: 0.1
+#     #     max_obstacle_height: 0.5
+#     #     obstacle_range: 1.5
+#     #     raytrace_range: 1.6
+
+# # table_superpixel_layer:
+# #   enabled:               false
+# #   voxel_decay:           60     #seconds if linear, e^n if exponential
+# #   decay_model:           0      #0=linear, 1=exponential, -1=persistent
+# #   voxel_size:            0.05   #meters
+# #   track_unknown_space:   true   #default space is unknown
+# #   observation_persistence: 0.0  #seconds
+# #   max_obstacle_height:   1.05    #meters
+# #   unknown_threshold:     15     #voxel height
+# #   mark_threshold:        0      #voxel height
+# #   update_footprint_enabled: true
+# #   combination_method:    1      #1=max, 0=override
+# #   obstacle_range:        4.0    #meters
+# #   origin_z:              0.0    #meters
+# #   publish_voxel_map:     true   # default off
+# #   transform_tolerance:   0.01    # seconds
+# #   mapping_mode:          false  # default off, saves map not for navigation
+# #   map_save_duration:     60     #default 60s, how often to autosave
+# #   observation_sources:   rgbd_right_mark rgbd_right_clear rgbd_left_mark rgbd_left_clear rgbd_top_mark rgbd_top_clear 
+
+# #   rgbd_left_mark:
+# #     data_type: PointCloud2
+# #     topic: camera_left/superpixel/pointcloud
+# #     marking: true
+# #     clearing: false
+# #     min_obstacle_height: 0.1     #default 0, meters
+# #     max_obstacle_height: 0.95     #defaule 3, meters
+# #     expected_update_rate: 0.0    #default 0, if not updating at this rate at least, remove from buffer
+# #     observation_persistence: 0.0 #default 0, use all measurements taken during now-value, 0=latest 
+# #     inf_is_valid: false          #default false, for laser scans
+# #     clear_after_reading: true    #default false, clear the buffer after the layer gets readings from it
+# #     voxel_filter: true           #default off, apply voxel filter to sensor, recommend on 
+# #     voxel_min_points: 0          #default 0, minimum points per voxel for voxel filter
+# #   rgbd_left_clear:
+# #     enabled: true                #default true, can be toggled on/off with associated service call
+# #     data_type: PointCloud2
+# #     topic: camera_left/superpixel/pointcloud
+# #     marking: false
+# #     clearing: true
+# #     min_z: 0.1                   #default 0, meters
+# #     max_z: 5.0                   #default 10, meters
+# #     vertical_fov_angle: 0.7      #default 0.7, radians
+# #     horizontal_fov_angle: 1.04   #default 1.04, radians
+# #     decay_acceleration: 0.       #default 0, 1/s^2. If laser scanner MUST be 0
+# #     model_type: 0                #default 0 (depth camera). Use 1 for 3D Lidar
+
+# #   rgbd_right_mark: 
+# #     data_type: PointCloud2
+# #     topic: camera_right/superpixel/pointcloud
+# #     marking: true
+# #     clearing: false
+# #     min_obstacle_height: 0.1     #default 0, meters
+# #     max_obstacle_height: 0.95   #defaule 3, meters
+# #     expected_update_rate: 0.0    #default 0, if not updating at this rate at least, remove from buffer
+# #     observation_persistence: 0.0 #default 0, use all measurements taken during now-value, 0=latest 
+# #     inf_is_valid: false          #default false, for laser scans
+# #     clear_after_reading: true    #default false, clear the buffer after the layer gets readings from it
+# #     voxel_filter: true           #default off, apply voxel filter to sensor, recommend on 
+# #     voxel_min_points: 0          #default 0, minimum points per voxel for voxel filter
+# #   rgbd_right_clear:
+# #     enabled: true                #default true, can be toggled on/off with associated service call
+# #     data_type: PointCloud2
+# #     topic: camera_right/superpixel/pointcloud
+# #     marking: false
+# #     clearing: true
+# #     min_z: 0.1                   #default 0, meters
+# #     max_z: 5.0                   #default 10, meters
+# #     vertical_fov_angle: 0.7      #default 0.7, radians
+# #     horizontal_fov_angle: 1.04   #default 1.04, radians
+# #     decay_acceleration: 0.       #default 0, 1/s^2. If laser scanner MUST be 0
+# #     model_type: 0                #default 0 (depth camera). Use 1 for 3D Lidar
+
+# #   rgbd_top_mark: 
+# #     data_type: PointCloud2
+# #     topic: camera_top/superpixel/pointcloud
+# #     marking: true
+# #     clearing: false
+# #     min_obstacle_height: 0.3     #default 0, meters
+# #     max_obstacle_height: 0.95    #defaule 3, meters
+# #     expected_update_rate: 5.0    #default 0, if not updating at this rate at least, remove from buffer
+# #     observation_persistence: 0.0 #default 0, use all measurements taken during now-value, 0=latest 
+# #     inf_is_valid: false          #default false, for laser scans
+# #     clear_after_reading: true    #default false, clear the buffer after the layer gets readings from it
+# #     voxel_filter: true           #default off, apply voxel filter to sensor, recommend on 
+# #     voxel_min_points: 0          #default 0, minimum points per voxel for voxel filter
+# #   rgbd_top_clear:
+# #     enabled: true                #default true, can be toggled on/off with associated service call
+# #     data_type: PointCloud2
+# #     topic: camera_top/superpixel/pointcloud
+# #     marking: false
+# #     clearing: true
+# #     min_z: 0.1                   #default 0, meters
+# #     max_z: 3.0                   #default 10, meters
+# #     vertical_fov_angle: 0.7      #default 0.7, radians
+# #     horizontal_fov_angle: 1.04   #default 1.04, radians
+# #     decay_acceleration: 0.       #default 0, 1/s^2. If laser scanner MUST be 0
+# #     model_type: 0                #default 0 (depth camera). Use 1 for 3D Lidar
+
+# rgbd_obstacle_layer:
+#   enabled:               true
+#   voxel_decay:           30     #seconds if linear, e^n if exponential
+#   decay_model:           0      #0=linear, 1=exponential, -1=persistent
+#   voxel_size:            0.05   #meters
+#   track_unknown_space:   true   #default space is unknown
+#   observation_persistence: 0.0  #seconds
+#   max_obstacle_height:   0.8    #meters
+#   unknown_threshold:     15     #voxel height
+#   mark_threshold:        0      #voxel height
+#   update_footprint_enabled: true
+#   combination_method:    1      #1=max, 0=override
+#   obstacle_range:        4.0    #meters
+#   origin_z:              0.0    #meters
+#   publish_voxel_map:     true   # default off
+#   transform_tolerance:   0.1    # seconds
+#   mapping_mode:          false  # default off, saves map not for navigation
+#   map_save_duration:     60     #default 60s, how often to autosave
+#   # observation_sources:   rgbd_right_mark rgbd_right_clear rgbd_left_mark rgbd_left_clear rgbd_top_mark rgbd_top_clear 
+#   observation_sources:   rgbd_left_mark rgbd_left_clear
+
+#   rgbd_left_mark:
+#     enabled: true
+#     topic: /camera_left/pointcloud2
+#     sensor_frame: camera_left_rgb_optical_frame
+#     marking: true
+#     clearing: false
+#     data_type: PointCloud2
+#     min_obstacle_height: 0.1     #default 0, meters
+#     max_obstacle_height: 0.95     #defaule 3, meters
+#     expected_update_rate: 0.0    #default 0, if not updating at this rate at least, remove from buffer
+#     observation_persistence: 0.0 #default 0, use all measurements taken during now-value, 0=latest 
+#     inf_is_valid: false          #default false, for laser scans
+#     clear_after_reading: true    #default false, clear the buffer after the layer gets readings from it
+#     voxel_filter: true           #default off, apply voxel filter to sensor, recommend on 
+#     voxel_min_points: 0          #default 0, minimum points per voxel for voxel filter
+#   rgbd_left_clear:
+#     enabled: true                #default true, can be toggled on/off with associated service call
+#     topic: /camera_left/pointcloud2
+#     sensor_frame: camera_left_rgb_optical_frame
+#     marking: false
+#     clearing: true
+#     data_type: PointCloud2
+#     min_z: 0.1                   #default 0, meters
+#     max_z: 5.0                   #default 10, meters
+#     vertical_fov_angle: 0.7      #default 0.7, radians
+#     horizontal_fov_angle: 1.04   #default 1.04, radians
+#     decay_acceleration: 0.       #default 0, 1/s^2. If laser scanner MUST be 0
+#     model_type: 0                #default 0 (depth camera). Use 1 for 3D Lidar
+
+#   # rgbd_right_mark: 
+#   #   data_type: PointCloud2
+#   #   topic: camera_right/depth/color/points
+#   #   marking: true
+#   #   clearing: false
+#   #   min_obstacle_height: 0.1     #default 0, meters
+#   #   max_obstacle_height: 0.95    #defaule 3, meters
+#   #   expected_update_rate: 0.0    #default 0, if not updating at this rate at least, remove from buffer
+#   #   observation_persistence: 0.0 #default 0, use all measurements taken during now-value, 0=latest 
+#   #   inf_is_valid: false          #default false, for laser scans
+#   #   clear_after_reading: true    #default false, clear the buffer after the layer gets readings from it
+#   #   voxel_filter: true           #default off, apply voxel filter to sensor, recommend on 
+#   #   voxel_min_points: 0          #default 0, minimum points per voxel for voxel filter
+#   # rgbd_right_clear:
+#   #   enabled: true                #default true, can be toggled on/off with associated service call
+#   #   data_type: PointCloud2
+#   #   topic: camera_right/depth/color/points
+#   #   marking: false
+#   #   clearing: true
+#   #   min_z: 0.1                   #default 0, meters
+#   #   max_z: 5.0                   #default 10, meters
+#   #   vertical_fov_angle: 0.7      #default 0.7, radians
+#   #   horizontal_fov_angle: 1.04   #default 1.04, radians
+#   #   decay_acceleration: 0.       #default 0, 1/s^2. If laser scanner MUST be 0
+#   #   model_type: 0                #default 0 (depth camera). Use 1 for 3D Lidar
+
+#   # rgbd_top_mark: 
+#   #   data_type: PointCloud2
+#   #   topic: camera_rotate/points
+#   #   marking: true
+#   #   clearing: false
+#   #   min_obstacle_height: 0.3     #default 0, meters
+#   #   max_obstacle_height: 0.95    #defaule 3, meters
+#   #   expected_update_rate: 5.0    #default 0, if not updating at this rate at least, remove from buffer
+#   #   observation_persistence: 0.0 #default 0, use all measurements taken during now-value, 0=latest 
+#   #   inf_is_valid: false          #default false, for laser scans
+#   #   clear_after_reading: true    #default false, clear the buffer after the layer gets readings from it
+#   #   voxel_filter: true           #default off, apply voxel filter to sensor, recommend on 
+#   #   voxel_min_points: 0          #default 0, minimum points per voxel for voxel filter
+#   # rgbd_top_clear:
+#   #   enabled: true                #default true, can be toggled on/off with associated service call
+#   #   data_type: PointCloud2
+#   #   topic: camera_rotate/points
+#   #   marking: false
+#   #   clearing: true
+#   #   min_z: 0.1                   #default 0, meters
+#   #   max_z: 3.0                   #default 10, meters
+#   #   vertical_fov_angle: 0.7      #default 0.7, radians
+#   #   horizontal_fov_angle: 1.04   #default 1.04, radians
+#   #   decay_acceleration: 0.       #default 0, 1/s^2. If laser scanner MUST be 0
+#   #   model_type: 0                #default 0 (depth camera). Use 1 for 3D Lidar
+
+# costmap_ros
+# global_frame: map
+# robot_base_frame: base_footprint
+
+# update_frequency: 3.0
+# publish_frequency: 3.0
+# static_map: false
+# map_type: costmap
+# resolution: 0.015
+
+# width: 10.0
+# height: 10.0
+
+# rolling_window: true
+# transform_tolerance: 0.4
+
+# plugins:
+#  - {name: voxel_obstacle_layer, type: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"}
+
+
+# rgbd_obstacle_layer:
+#   enabled:                  true
+#   voxel_decay:              15    # seconds if linear, e^n if exponential
+#   decay_model:              0     # 0=linear, 1=exponential, -1=persistent
+#   voxel_size:               0.05  # meters
+#   track_unknown_space:      false  # default space is known
+#   max_obstacle_height:      2.0   # meters
+#   unknown_threshold:        15    # voxel height
+#   mark_threshold:           0     # voxel height
+#   update_footprint_enabled: true
+#   combination_method:       1     # 1=max, 0=override
+#   obstacle_range:           3.0   # meters
+#   origin_z:                 0.0   # meters
+#   publish_voxel_map:        true # default off
+#   transform_tolerance:      0.2   # seconds
+#   mapping_mode:             false # default off, saves map not for navigation
+#   map_save_duration:        60    # default 60s, how often to autosave
+#   observation_sources:      rgbd1_mark rgbd1_clear
+#   rgbd1_mark:
+#     data_type: PointCloud2
+#     topic: /camera_left/pointcloud2
+#     marking: true
+#     clearing: false
+#     min_obstacle_height: 0.1     # default 0, meters
+#     max_obstacle_height: 3.0     # default 3, meters
+#     expected_update_rate: 1.0    # default 0, if not updating at this rate at least, remove from buffer
+#     observation_persistence: 0.0 # default 0, use all measurements taken during now-value, 0=latest
+#     inf_is_valid: false          # default false, for laser scans
+#   rgbd1_clear:
+#     data_type: PointCloud2
+#     topic: /camera_left/pointcloud2
+#     marking: false
+#     clearing: true
+#     max_z: 7.0                  # default 0, meters
+#     min_z: 0.1                  # default 10, meters
+#     vertical_fov_angle: 0.8745  # default 0.7, radians
+#     horizontal_fov_angle: 1.048 # default 1.04, radians
+#     decay_acceleration: 5.0     # default 0, 1/s^2. If laser scanner MUST be 0
+#     voxel_filter: false          # default off, apply voxel filter to sensor, recommend on
+
+voxel_obstacle_layer:
+  enabled:               true
+  voxel_decay:           5     #seconds if linear, e^n if exponential
+  decay_model:           0      #0=linear, 1=exponential, -1=persistent
+  voxel_size:            0.05   #meters
+  track_unknown_space:   true   #default space is unknown
+  observation_persistence: 0.0  #seconds
+  max_obstacle_height:   0.8    #meters
+  unknown_threshold:     15     #voxel height
+  mark_threshold:        0      #voxel height
+  update_footprint_enabled: true
+  combination_method:    1      #1=max, 0=override
+  obstacle_range:        4.0    #meters
+  origin_z:              0.0    #meters
+  publish_voxel_map:     true   # default off
+  transform_tolerance:   0.7    # seconds
+  mapping_mode:          false  # default off, saves map not for navigation
+  map_save_duration:     60     #default 60s, how often to autosave
+  # observation_sources:   rgbd_right_mark rgbd_right_clear rgbd_left_mark rgbd_left_clear rgbd_top_mark rgbd_top_clear 
+  observation_sources:   rgbd_left_mark rgbd_left_clear rgbd_right_mark rgbd_right_clear
+
+  rgbd_left_mark:
+    enabled: true
+    topic: /camera_left/pointcloud2
+    sensor_frame: camera_left_rgb_optical_frame
+    marking: true
+    clearing: false
+    data_type: PointCloud2
+    min_obstacle_height: 0.1     #default 0, meters
+    max_obstacle_height: 0.95     #defaule 3, meters
+    expected_update_rate: 0.0    #default 0, if not updating at this rate at least, remove from buffer
+    observation_persistence: 0.0 #default 0, use all measurements taken during now-value, 0=latest 
+    inf_is_valid: false          #default false, for laser scans
+    clear_after_reading: true    #default false, clear the buffer after the layer gets readings from it
+    voxel_filter: true           #default off, apply voxel filter to sensor, recommend on 
+    voxel_min_points: 0          #default 0, minimum points per voxel for voxel filter
+  rgbd_left_clear:
+    enabled: true                #default true, can be toggled on/off with associated service call
+    topic: /camera_left/pointcloud2
+    sensor_frame: camera_left_rgb_optical_frame
+    marking: false
+    clearing: true
+    data_type: PointCloud2
+    min_z: 0.1                   #default 0, meters
+    max_z: 5.0                   #default 10, meters
+    vertical_fov_angle: 0.7      #default 0.7, radians
+    horizontal_fov_angle: 1.04   #default 1.04, radians
+    decay_acceleration: 0.       #default 0, 1/s^2. If laser scanner MUST be 0
+    model_type: 0                #default 0 (depth camera). Use 1 for 3D Lidar
+
+  rgbd_right_mark:
+    enabled: true
+    topic: /camera_right/pointcloud2
+    sensor_frame: camera_right_rgb_optical_frame
+    marking: true
+    clearing: false
+    data_type: PointCloud2
+    min_obstacle_height: 0.1     #default 0, meters
+    max_obstacle_height: 0.95     #defaule 3, meters
+    expected_update_rate: 0.0    #default 0, if not updating at this rate at least, remove from buffer
+    observation_persistence: 0.0 #default 0, use all measurements taken during now-value, 0=latest 
+    inf_is_valid: false          #default false, for laser scans
+    clear_after_reading: true    #default false, clear the buffer after the layer gets readings from it
+    voxel_filter: true           #default off, apply voxel filter to sensor, recommend on 
+    voxel_min_points: 0          #default 0, minimum points per voxel for voxel filter
+  rgbd_right_clear:
+    enabled: true                #default true, can be toggled on/off with associated service call
+    topic: /camera_right/pointcloud2
+    sensor_frame: camera_right_rgb_optical_frame
+    marking: false
+    clearing: true
+    data_type: PointCloud2
+    min_z: 0.1                   #default 0, meters
+    max_z: 5.0                   #default 10, meters
+    vertical_fov_angle: 0.7      #default 0.7, radians
+    horizontal_fov_angle: 1.04   #default 1.04, radians
+    decay_acceleration: 0.       #default 0, 1/s^2. If laser scanner MUST be 0
+    model_type: 0                #default 0 (depth camera). Use 1 for 3D Lidar

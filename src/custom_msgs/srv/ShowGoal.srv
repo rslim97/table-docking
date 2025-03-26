@@ -1,0 +1,13 @@
+geometry_msgs/PoseStamped goal_pose
+geometry_msgs/PointStamped[] target_points
+uint8 command
+
+uint8 CANCEL                    = 0
+uint8 NEXT_STEP                 = 1
+uint8 DOOR_TRAVERSAL            = 2
+uint8 LIFT_TRAVERSAL            = 3
+uint8 TABLE_DOCKING             = 4
+uint8 ROOM_TRAVERSAL            = 5
+uint8 RAMP_TRAVERSAL            = 6
+---
+bool result

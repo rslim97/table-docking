@@ -1,0 +1,7 @@
+<launch>
+    <arg name="reference_frame" default="your_reference_frame" />
+    <arg name="frame" default="your_frame" />
+    <arg name="param_file" default="your_param_file" />
+    <rosparam command="load" file="$(find dynamic_tf_publisher)/config/$(arg param_file)" ns="$(arg frame)"/>
+    <node name="$(arg frame)_tf_publisher" pkg="dynamic_tf_publisher" type="publisher" args="$(arg reference_frame) $(arg frame)" output="screen"/>
+</launch>
